@@ -25,6 +25,7 @@ import java.util.ArrayList;
 public class View extends JFrame {
 
 	private final JPanel view;
+	private final User savedUser;
 
 	public View(User user) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Application.favicon));
@@ -35,10 +36,12 @@ public class View extends JFrame {
 		view.setBorder(new EmptyBorder(0, 0, 0, 0));
 		setContentPane(view);
 		view.setLayout(null);
+
+		savedUser = user;
 		
 		createButton();
-		createSideBar(user);
-		createTable(user);
+		createSideBar();
+		createTable();
 		
 		JLabel imgView = new JLabel("");
 		imgView.setBounds(0, 5, 1290, 720);
@@ -70,13 +73,13 @@ public class View extends JFrame {
 		view.add(btn_logOut);
 	}
 	
-	private void createSideBar(User user) {
+	private void createSideBar() {
 		JButton cre_sb = new JButton("");
 		cre_sb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				
-				Create cre = new Create(user);
+				Create cre = new Create(savedUser);
 				cre.setVisible(true);
 			}
 		});
@@ -93,7 +96,7 @@ public class View extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				
-				Cancel can = new Cancel(user);
+				Cancel can = new Cancel(savedUser);
 				can.setVisible(true);
 			}
 		});
@@ -110,7 +113,7 @@ public class View extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				
-				View viw = new View(user);
+				View viw = new View(savedUser);
 				viw.setVisible(true);
 			}
 		});
@@ -123,7 +126,7 @@ public class View extends JFrame {
 		view.add(viw_sb);
 	}
 	
-	private void createTable(User user) {
+	private void createTable() {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(430, 237, 758, 339);
 		view.add(scrollPane);
@@ -143,7 +146,7 @@ public class View extends JFrame {
 		
 		tbModel.setRowCount(0);
 
-		ArrayList<Appointment> appointments = AppointManager.getAllAppointments(user);
+		ArrayList<Appointment> appointments = AppointManager.getAllAppointments(savedUser);
 
 		for (Appointment appointment : appointments) {
 			String appID = appointment.getAppID();

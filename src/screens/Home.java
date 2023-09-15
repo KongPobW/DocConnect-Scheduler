@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 public class Home extends JFrame {
 
 	private final JPanel home;
+	private final User savedUser;
 
 	public Home(User user) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Application.favicon));
@@ -22,9 +23,11 @@ public class Home extends JFrame {
 		home.setBorder(new EmptyBorder(0, 0, 0, 0));
 		setContentPane(home);
 		home.setLayout(null);
+
+		savedUser = user;
 		
 		createButton();
-		createSideBar(user);
+		createSideBar();
 		
 		JLabel welcome = new JLabel(user.getUsername());
 		welcome.setForeground(Color.WHITE);
@@ -62,13 +65,13 @@ public class Home extends JFrame {
 		home.add(btn_logOut);
 	}
 	
-	private void createSideBar(User user) {
+	private void createSideBar() {
 		JButton cre_sb = new JButton("");
 		cre_sb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				
-				Create cre = new Create(user);
+				Create cre = new Create(savedUser);
 				cre.setVisible(true);
 			}
 		});
@@ -85,7 +88,7 @@ public class Home extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				
-				Cancel can = new Cancel(user);
+				Cancel can = new Cancel(savedUser);
 				can.setVisible(true);
 			}
 		});
@@ -102,7 +105,7 @@ public class Home extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				
-				View viw = new View(user);
+				View viw = new View(savedUser);
 				viw.setVisible(true);
 			}
 		});

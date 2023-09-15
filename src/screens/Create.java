@@ -25,6 +25,7 @@ public class Create extends JFrame {
 	private JTextField time;
 	private JTextField phone;
 	private JComboBox<String> dept;
+	private final User savedUser;
 
 	public Create(User user) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Application.favicon));
@@ -35,11 +36,13 @@ public class Create extends JFrame {
 		create.setBorder(new EmptyBorder(0, 0, 0, 0));
 		setContentPane(create);
 		create.setLayout(null);
+
+		savedUser = user;
 		
 		createField();
 		createDrop();
-		createButton(user);
-		createSideBar(user);
+		createButton();
+		createSideBar();
 		
 		JLabel imgCreate = new JLabel("");
 		imgCreate.setBounds(0, 5, 1290, 720);
@@ -47,7 +50,7 @@ public class Create extends JFrame {
 		create.add(imgCreate);
 	}
 	
-	private void createButton(User user) {
+	private void createButton() {
 		JButton btn_logOut = new JButton("");
 		btn_logOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -73,7 +76,7 @@ public class Create extends JFrame {
 		JButton btn_cre = new JButton("");
 		btn_cre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				handleCreate(user);
+				handleCreate();
 			}
 		});
 		btn_cre.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -138,13 +141,13 @@ public class Create extends JFrame {
 		phone.setColumns(10);
 	}
 	
-	private void createSideBar(User user) {
+	private void createSideBar() {
 		JButton cre_sb = new JButton("");
 		cre_sb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				
-				Create cre = new Create(user);
+				Create cre = new Create(savedUser);
 				cre.setVisible(true);
 			}
 		});
@@ -161,7 +164,7 @@ public class Create extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				
-				Cancel can = new Cancel(user);
+				Cancel can = new Cancel(savedUser);
 				can.setVisible(true);
 			}
 		});
@@ -178,7 +181,7 @@ public class Create extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				
-				View viw = new View(user);
+				View viw = new View(savedUser);
 				viw.setVisible(true);
 			}
 		});
@@ -265,8 +268,8 @@ public class Create extends JFrame {
 		}
 	}
 	
-	private void handleCreate(User user) {
-		Appointment appointment = new Appointment(date.getText(), time.getText(), phone.getText(), dept.getSelectedItem().toString(), user.getUsername());
+	private void handleCreate() {
+		Appointment appointment = new Appointment(date.getText(), time.getText(), phone.getText(), dept.getSelectedItem().toString(), savedUser.getUsername());
 
 		if (appointment.getDate().equals("YYYY-MM-DD") || appointment.getTime().equals("HH:MM:SS") || appointment.getPhoneNumber().equals("098xxxxxxx")) {
 			JOptionPane.showMessageDialog(null, "Please type all information");
@@ -282,7 +285,7 @@ public class Create extends JFrame {
 
 		dispose();
 
-		Home hom = new Home(user);
+		Home hom = new Home(savedUser);
 		hom.setVisible(true);
 	}
 }

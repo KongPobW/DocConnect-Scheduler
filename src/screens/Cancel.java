@@ -15,6 +15,7 @@ public class Cancel extends JFrame {
 	private final JPanel cancel;
 	private JTextField appointID;
 	private JPasswordField password;
+	private final User savedUser;
 
 	public Cancel(User user) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Application.favicon));
@@ -25,10 +26,12 @@ public class Cancel extends JFrame {
 		cancel.setBorder(new EmptyBorder(0, 0, 0, 0));
 		setContentPane(cancel);
 		cancel.setLayout(null);
+
+		savedUser = user;
 		
 		createField();
-		createButton(user);
-		createSideBar(user);
+		createButton();
+		createSideBar();
 		
 		JLabel imgCancel = new JLabel("");
 		imgCancel.setBounds(0, 5, 1290, 720);
@@ -36,7 +39,7 @@ public class Cancel extends JFrame {
 		cancel.add(imgCancel);
 	}
 	
-	private void createButton(User user) {
+	private void createButton() {
 		JButton btn_logOut = new JButton("");
 		btn_logOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -62,7 +65,7 @@ public class Cancel extends JFrame {
 		JButton btn_can = new JButton("");
 		btn_can.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				handleCancel(user);
+				handleCancel();
 			}
 		});
 		btn_can.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -89,13 +92,13 @@ public class Cancel extends JFrame {
 		cancel.add(password);
 	}
 	
-	private void createSideBar(User user) {
+	private void createSideBar() {
 		JButton cre_sb = new JButton("");
 		cre_sb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				
-				Create cre = new Create(user);
+				Create cre = new Create(savedUser);
 				cre.setVisible(true);
 			}
 		});
@@ -112,7 +115,7 @@ public class Cancel extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				
-				Cancel can = new Cancel(user);
+				Cancel can = new Cancel(savedUser);
 				can.setVisible(true);
 			}
 		});
@@ -129,7 +132,7 @@ public class Cancel extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				
-				View viw = new View(user);
+				View viw = new View(savedUser);
 				viw.setVisible(true);
 			}
 		});
@@ -142,20 +145,20 @@ public class Cancel extends JFrame {
 		cancel.add(viw_sb);
 	}
 	
-	private void handleCancel(User user) {
+	private void handleCancel() {
 		if (appointID.getText().equals("") || password.getPassword().equals("")) {
 			JOptionPane.showMessageDialog(null, "Please type all information");
 			return;
 		}
 
-		boolean isSuccess = AppointManager.removeAppointment(appointID.getText(), user.getUsername(), new String(password.getPassword()));
+		boolean isSuccess = AppointManager.removeAppointment(appointID.getText(), savedUser.getUsername(), new String(password.getPassword()));
 
 		if (isSuccess) {
 			JOptionPane.showMessageDialog(null, "Cancel Appointment Successfully");
 
 			dispose();
 
-			Home hom = new Home(user);
+			Home hom = new Home(savedUser);
 			hom.setVisible(true);
 
 		} else {
