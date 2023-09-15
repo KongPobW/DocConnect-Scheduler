@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 
 public class Home extends JFrame {
 
-	private JPanel home;
+	private final JPanel home;
 
 	public Home(User user) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Application.favicon));

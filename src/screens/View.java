@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 public class View extends JFrame {
 
-	private JPanel view;
+	private final JPanel view;
 
 	public View(User user) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Application.favicon));

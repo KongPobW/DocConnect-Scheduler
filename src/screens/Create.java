@@ -20,7 +20,7 @@ import java.sql.Statement;
 
 public class Create extends JFrame {
 
-	private JPanel create;
+	private final JPanel create;
 	private JTextField date;
 	private JTextField time;
 	private JTextField phone;
@@ -216,7 +216,7 @@ public class Create extends JFrame {
 			e1.printStackTrace();
 		}
 	}
-	
+
 	private void placeHolderDateGained() {
 		if (date.getText().equals("YYYY-MM-DD")) {
 			date.setText("");
@@ -224,7 +224,7 @@ public class Create extends JFrame {
 			date.setFont(new Font("Arial", Font.PLAIN, 28));
 		}
 	}
-	
+
 	private void placeHolderDateLost() {
 		if (date.getText().equals("")) {
 			date.setForeground(Color.LIGHT_GRAY);
@@ -232,7 +232,7 @@ public class Create extends JFrame {
 			date.setText("YYYY-MM-DD");
 		}
 	}
-	
+
 	private void placeHolderTimeGained() {
 		if (time.getText().equals("HH:MM:SS")) {
 			time.setText("");
@@ -240,7 +240,7 @@ public class Create extends JFrame {
 			time.setFont(new Font("Arial", Font.PLAIN, 28));
 		}
 	}
-	
+
 	private void placeHolderTimeLost() {
 		if (time.getText().equals("")) {
 			time.setForeground(Color.LIGHT_GRAY);
@@ -248,7 +248,7 @@ public class Create extends JFrame {
 			time.setText("HH:MM:SS");
 		}
 	}
-	
+
 	private void placeHolderPhoneGained() {
 		if (phone.getText().equals("098xxxxxxx")) {
 			phone.setText("");
@@ -256,7 +256,7 @@ public class Create extends JFrame {
 			phone.setFont(new Font("Arial", Font.PLAIN, 28));
 		}
 	}
-	
+
 	private void placeHolderPhoneLost() {
 		if (phone.getText().equals("")) {
 			phone.setForeground(Color.LIGHT_GRAY);

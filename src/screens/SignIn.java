@@ -13,7 +13,7 @@ import java.util.Arrays;
 
 public class SignIn extends JFrame {
 
-	private JPanel signIn;
+	private final JPanel signIn;
 	private JTextField username;
 	private JPasswordField password;
 

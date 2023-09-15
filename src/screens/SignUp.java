@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 
 public class SignUp extends JFrame {
 
-	private JPanel signUp;
+	private final JPanel signUp;
 	private JTextField username;
 	private JTextField name;
 	private JPasswordField password;
